@@ -6,7 +6,7 @@ import os
 # create class to solve the challenge
 class Submarine:
 
-    """ This class solves the Day 1 challenge from https://adventofcode.com/2021/day/2"""
+    """ This class solves the Day 2 challenge from https://adventofcode.com/2021/day/2"""
 
     def __init__(self, folder: str, file_name: str):
         """
