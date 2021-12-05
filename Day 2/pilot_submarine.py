@@ -4,9 +4,9 @@ import os
 
 
 # create class to solve the challenge
-class DepthCounter:
+class Submarine:
 
-    """ This class solves the Day 1 challenge from https://adventofcode.com/2021/day/1"""
+    """ This class solves the Day 1 challenge from https://adventofcode.com/2021/day/2"""
 
     def __init__(self, folder: str, file_name: str):
         """
@@ -25,7 +25,7 @@ class DepthCounter:
 
     def read_input(self):
         """
-        Read html input from downloaded website (https://adventofcode.com/2021/day/1/input) and return a list of integer depth measures.
+        Read html input from downloaded website (https://adventofcode.com/2021/day/2/input) and return a list of submarine moving commands.
         """
         with open(self.file_name) as html_input:
             # open html file
@@ -38,42 +38,57 @@ class DepthCounter:
             # create list of integer inputs and delete empty entry
             input = content.split(sep = ",")
             input.remove("")
-            self.input = [int(x) for x in input]
+            self.input = input
 
             # close html file
             html_input.close()
-
-    def count_depth_increase(self):
+            
+    def calculate_positioning(self):
         """
-        Perform calculation to solve the challenge: https://adventofcode.com/2021/day/1
+        Calculate the position of the submarine given the html input (first part of the challenge)
         """
-        counter = 0
-        for element in range(1,len(self.input)):
-            if self.input[element] > self.input[element-1]:
-                counter += 1
+        self.depth = int(0)
+        self.horizontal = int(0)
 
-        return counter
+        for element in self.input:
+            command, value = element.split(sep = " ")
+            if command == "forward":
+                self.horizontal += int(value)
+            elif command == "down":
+                self.depth += int(value)
+            elif command == "up":
+                self.depth -= int(value)
 
-    def count_depth_increase_window(self):
+    def calculate_positioning_with_aim(self):
         """
-        Perform calculation to solve the challenge: https://adventofcode.com/2021/day/1
+        Calculate the position of the submarine given the html input (second part of the challenge)
         """
-        counter = 0
-        for element in range(1,(len(self.input)-2)):
-            if sum(self.input[element:element+3]) > sum(self.input[element-1:element+2]):
-                counter += 1
+        self.depth = int(0)
+        self.horizontal = int(0)
+        self.aim =int(0) 
 
-        return counter
+        for element in self.input:
+            command, value = element.split(sep = " ")
+            if command == "forward":
+                self.horizontal += int(value)
+                self.depth += self.aim * int(value)
+            elif command == "down":
+                self.aim += int(value)
+            elif command == "up":
+                self.aim -= int(value)
+
+    def multiply_position(self):
+        """
+        Perform final calculation to solve the challenge: https://adventofcode.com/2021/day/2
+        """
+        return int(self.depth * self.horizontal)
 
 
 if __name__ == "__main__":
    
    # solve challenge with time complexity O(n)
-   counter = DepthCounter(folder = "C:/Users/z003h4bh/Desktop/Advent of Code/Day 1", file_name = "input.html")
-   counter.read_input()
-   counter.count_depth_increase()
-   counter.count_depth_increase_window()
-
-  
-
-
+   submarine = Submarine(folder = "C:/Users/z003h4bh/Desktop/Advent of Code/Advent-of-Code/Day 2", file_name = "input.html")
+   submarine.read_input()
+   #submarine.calculate_positioning() # first part of the challenge
+   submarine.calculate_positioning_with_aim() # second part of the challenge
+   submarine.multiply_position()

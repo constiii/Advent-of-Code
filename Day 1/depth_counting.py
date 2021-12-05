@@ -45,7 +45,7 @@ class DepthCounter:
 
     def count_depth_increase(self):
         """
-        Perform calculation to solve the challenge: https://adventofcode.com/2021/day/1
+        Perform calculation to solve the challenge: https://adventofcode.com/2021/day/1 (first part of the challenge)
         """
         counter = 0
         for element in range(1,len(self.input)):
@@ -56,7 +56,7 @@ class DepthCounter:
 
     def count_depth_increase_window(self):
         """
-        Perform calculation to solve the challenge: https://adventofcode.com/2021/day/1
+        Perform calculation to solve the challenge: https://adventofcode.com/2021/day/1 (second part of the challenge)
         """
         counter = 0
         for element in range(1,(len(self.input)-2)):
@@ -69,11 +69,7 @@ class DepthCounter:
 if __name__ == "__main__":
    
    # solve challenge with time complexity O(n)
-   counter = DepthCounter(folder = "C:/Users/z003h4bh/Desktop/Advent of Code/Day 1", file_name = "input.html")
+   counter = DepthCounter(folder = "C:/Users/z003h4bh/Desktop/Advent of Code/Advent-of-Code/Day 1", file_name = "input.html")
    counter.read_input()
    counter.count_depth_increase()
    counter.count_depth_increase_window()
-
-  
-
-
